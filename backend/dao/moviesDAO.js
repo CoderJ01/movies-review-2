@@ -63,4 +63,31 @@ export default class MoviesDAO {
             console.error(`unable to get ratings, ${e}`);
         }
     }
+
+    static async getMovieById(id) {
+        try {
+            return await movies.aggregate([  //provide sequence of data aggregation operations
+                {
+                    // look for movie document that matches specified id
+                    $match: {
+                        _id: new ObjectId(id)
+                    }
+                },
+                {
+                    // perform equity join
+                    $lookup: 
+                    {
+                        from: 'reviews',
+                        localField: '_id',
+                        foreignField: 'movie_id',
+                        as: 'reviews'
+                    }
+                }
+            ]).next();
+        }
+        catch(e) {
+            console.error(`something went wrong in getMovieById: ${e}`);
+            throw e;
+        }
+    }
 }
