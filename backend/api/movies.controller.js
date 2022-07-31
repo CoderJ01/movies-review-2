@@ -18,6 +18,7 @@ export default class MoviesController {
 
         const { movieList, totalNumMovies } = await MoviesDAO.getMovies({filters, page, moviesPerPage});
 
+        // send JSON response
         let response = {
             movies: movieList,
             page: page,
