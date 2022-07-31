@@ -1,6 +1,7 @@
 import ReviewsDAO from '../dao/reviewsDAO.js';
 
 export default class ReviewsController {
+    // add review
     static async apiPostReview(req, res, next) {
         try {
             // get info from request's body parameter
@@ -29,6 +30,7 @@ export default class ReviewsController {
         }
     }
 
+    // update review
     static async apiUpdateReview(req, res, next) {
         try {
             const reviewId = req.body.review._id;
@@ -60,6 +62,7 @@ export default class ReviewsController {
         }
     }
 
+    // delete review
     static async apiDeleteReview(req, res, next) {
         try {
             const reviewId = req.body.review_id;
