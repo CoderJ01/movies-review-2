@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Login() {
+function Movie() {
     return (
         <div className='App'>
-            Login
+            Movie
         </div>
     );
 }
 
-export default Login;
+export default Movie;
