@@ -1,5 +1,4 @@
-import e from "express";
-import MoviesDAO from "../dao/moviesDAO"; // import DAO
+import MoviesDAO from '../dao/moviesDAO.js'; // import DAO
 
 export default class MoviesController {
     // apiGetMovies, query string will be in response object
@@ -16,11 +15,15 @@ export default class MoviesController {
             filters.title = req.query.title;
         }
 
-        const { movieList, totalNumMovies } = await MoviesDAO.getMovies({filters, page, moviesPerPage});
+        const { moviesList, totalNumMovies } = await MoviesDAO.getMovies({
+            filters,
+            page, 
+            moviesPerPage
+        });
 
         // send JSON response
         let response = {
-            movies: movieList,
+            movies: moviesList,
             page: page,
             filters: filters,
             entries_per_page: moviesPerPage,
