@@ -36,9 +36,9 @@ export default class MoviesController {
         try {
             let id = req.params.id || {}; // look for an id parameter
             // call MoviesDAO.getMovieById, which will return specific movie in json response
-            let movie = await MoviesDAO.apiGetMovieById(id); 
+            let movie = await MoviesDAO.getMovieById(id); 
 
-            if(movie) {
+            if(!movie) {
                 res.status(404).json({ error: "not found" });
                 return;
             }
@@ -46,6 +46,7 @@ export default class MoviesController {
         }
         catch(e) {
             console.log(`api, ${e}`);
+            res.status(500).json({error: e});
         }
     }
 
