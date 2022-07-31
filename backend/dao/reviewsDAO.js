@@ -15,4 +15,22 @@ export default class ReviewsDAO {
             console.error(`unable to establish connection handle in reviewDAO: ${e}`);
         }
     }
+
+    // add review
+    static async addReview(movieId, user, review, date) {
+        try {
+            const reviewDoc = {
+                name: user.name,
+                user_id: user._id,
+                date: date,
+                review: review,
+                movie_id: Object(movieId)
+            }
+            return await reviews.insertOne(reviewDoc);
+        }
+        catch(e) {
+            console.error(`unable to post review: ${e}`);
+            return { error: e }
+        }
+    }
 }
