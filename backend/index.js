@@ -17,14 +17,14 @@ async function main() {
 
         // start web server
         app.listen(port, () => {
-            console.log('server is running on port: '+ port);
+            console.log('server is running on port: ' + port);
         });
     }
     catch(e) {
         console.error(e);
         process.exit(1);
     }
-
-    // send errors to console
-    main().catch(console.error);
 }
+
+// send errors to console
+main().catch(console.error);
