@@ -17,12 +17,14 @@ export default class MoviesDAO {
         }
     }
 
+    // accepts a filter object as an argument
     static async getMovies({ // default filter
         filters = null,
         page = 0,
         moviesPerPage = 20, // will only get 20 movies at once
     } = {}) {
         let query;
+        
         if(filters) {
             if("title" in filters) {
                 query = { $text: { $search: filters['title']}}
