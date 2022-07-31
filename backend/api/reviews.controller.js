@@ -28,4 +28,35 @@ export default class ReviewsController {
             res.status(500).json({ error: e.message });
         }
     }
+
+    static async apiUpdateReview(req, res, next) {
+        try {
+            const reviewId = req.body.review._id;
+            const review = req.body.review;
+
+            const date = new Date();
+
+            // call ReviewsDAO.updateReview
+            const ReviewResponse = await ReviewsDAO.updateReview(
+                reviewId,
+                req.body.user._id,
+                review, 
+                date
+            );
+
+            var { error } = ReviewResponse;
+            if(error) {
+                res.status.json({error});
+            }
+
+            // ReviewResponse is a document, which contains the number of modified documents
+            if(ReviewResponse.modifiedCount === 0) {
+                throw new Error ("unable to update review. User may npt be original poster");
+            }
+            res.json({ status: "success" });
+        }
+        catch(e) {
+            res.status(500).json({ error: e.message });
+        }
+    }
 }
