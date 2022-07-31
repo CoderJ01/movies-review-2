@@ -50,6 +50,23 @@ function App() {
           </Nav>
         </Navbar.Collapse>
     </Navbar>
+    <Switch>
+      {/* use Switch component to switch between different routes */}
+      <Route exact path={["/", "/movies"]} component={MoviesList}>
+      </Route>
+      {/* show MoviesList component */}
+      <Route path="/movies/:id/review" render={(props) => // render allow props to be passed
+        <AddReview {...props} user={user} />}>
+      </Route>
+      {/* render Movie */}
+      <Route path="/movies/:id/" render={(props) => 
+        <Movie {...props} user={user} />}>
+      </Route>
+      {/* render Login  */}
+      <Route path="/login" render={(props) => 
+        <Login {...props} user={login} />}>
+      </Route>
+    </Switch>
     </div>
   );
 }
