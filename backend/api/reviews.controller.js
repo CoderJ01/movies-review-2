@@ -15,7 +15,7 @@ export default class ReviewsController {
             const date = new Date();
 
             // send infomation to ReviewsDAO.addReview
-            const ReviewResponse = await ReviewsDAO.addReviews(
+            const ReviewResponse = await ReviewsDAO.addReview(
                 movieId,
                 userInfo,
                 review,
@@ -33,7 +33,7 @@ export default class ReviewsController {
     // update review
     static async apiUpdateReview(req, res, next) {
         try {
-            const reviewId = req.body.review._id;
+            const reviewId = req.body.review_id;
             const review = req.body.review;
 
             const date = new Date();
@@ -41,7 +41,7 @@ export default class ReviewsController {
             // call ReviewsDAO.updateReview
             const ReviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
-                req.body.user._id,
+                req.body.user_id,
                 review, 
                 date
             );
