@@ -42,6 +42,16 @@ const MoviesList = props => {
             });
         })
     }
+
+    const onChangeSearchTitle = e => {
+        const searchTitle = e.target.value;
+        setSearchTitle(searchTitle);
+    }
+
+    const onChangeSearchRating = e => {
+        const searchRatings = e.target.value;
+        setSearchRatings(searchRatings);
+    }
 }
 
 // function MoviesList() {
@@ -53,3 +63,4 @@ const MoviesList = props => {
 // }
 
 export default MoviesList;
+
