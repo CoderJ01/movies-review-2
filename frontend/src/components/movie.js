@@ -35,13 +35,4 @@ const Movie = props => {
     );
 }
 
-
-// function Movie() {
-//     return (
-//         <div className='App'>
-//             Movie
-//         </div>
-//     );
-// }
-
 export default Movie;
