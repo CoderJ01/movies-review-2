@@ -2,6 +2,11 @@
 import React, {useState, useEffect} from 'react';
 import MovieDataService from "../services/movies";
 import { Link } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 
 // recieves and uses props
 const MoviesList = props => {
@@ -9,7 +14,7 @@ const MoviesList = props => {
     // 2nd and 3rd lines keep track of what user has entered
     const [movies, setMovies] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");  
-    const [searchRatings, setSearchRatings] = useState("");
+    const [searchRating, setSearchRating] = useState("");
     const [ratings, setRatings] = useState(["All Ratings"]);
 
     // performed after rendering
@@ -49,17 +54,58 @@ const MoviesList = props => {
     }
 
     const onChangeSearchRating = e => {
-        const searchRatings = e.target.value;
-        setSearchRatings(searchRatings);
+        const searchRating = e.target.value;
+        setSearchRating(searchRating);
     }
+
+    return (
+        <div className='App'>
+            <Container>
+                <Form>
+                    <Col>
+                        <Form.Group>
+                            <Form.Control 
+                                type="text"
+                                placeholder="Search by title"
+                                value={searchTitle} // set to searchTitle state variable
+                                onChange={onChangeSearchTitle}/>
+                        </Form.Group>
+                        {/* call findByTitle */}
+                        <Button
+                            variant="primary"
+                            type="button"
+                            onClick={findByTitle}>
+                            Search
+                        </Button>      
+                    </Col>
+                    <Col>
+                    <Form.Group>
+                        {/* dropdown to select movie rating */}
+                        <Form.Control
+                            as="select" onChange={onChangeSearchRating}>
+                            {ratings.map(rating => {
+                                return(
+                                    <option value={rating}></option>
+                                );
+                            })}
+                        </Form.Control>
+                    </Form.Group>
+                    {/* call findByRating */}
+                    <Button
+                        variant="primary"
+                        type="button"
+                        onClick={findByRatings}
+                    >
+                        Search
+                    </Button>
+                    </Col>
+                </Form>
+            </Container>
+        </div>
+    );
 }
 
 // function MoviesList() {
-//     return (
-//         <div className='App'>
-//             Movies List
-//         </div>
-//     );
 // }
 
 export default MoviesList;
