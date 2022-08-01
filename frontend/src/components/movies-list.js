@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 
 // recieves and uses props
 const MoviesList = props => {
@@ -100,6 +101,26 @@ const MoviesList = props => {
                     </Button>
                     </Col>
                 </Form>
+                <Row>
+                    {/* map, for each movie in 'movies' return Card component */}
+                    {movies.map((movie) => {
+                        return(
+                            <Col>
+                                <Card style={{ width: '18rem'}}>
+                                    <Card.Img src={movie.poster+"/100px180"} />
+                                    <Card.Body>
+                                        <Card.Title>{movie.title}</Card.Title>
+                                        <Card.Text>
+                                            Rating: {movie.rated}
+                                        </Card.Text>
+                                        <Card.Text>{movie.plot}</Card.Text>
+                                        <Link to = {"/movie/" + movie._id}>View Reviews</Link>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        )
+                    })}
+                </Row>
             </Container>
         </div>
     );
