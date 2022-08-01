@@ -36,7 +36,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link>
               {/* Link allows routing to different components */}
-              <Link to={"/movie"}>Movies</Link>
+              <Link to={"/movies"}>Movies</Link>
             </Nav.Link>
             <Nav.Link>
               { user ? (
@@ -52,7 +52,7 @@ function App() {
     </Navbar>
     <Switch>
       {/* use Switch component to switch between different routes */}
-      <Route exact path={["/", "/movies"]} component={MoviesList}>
+      <Route exact path={["/","/movies"]} component={MoviesList}>
       </Route>
       {/* show MoviesList component */}
       <Route path="/movies/:id/review" render={(props) => // render allow props to be passed

@@ -49,6 +49,32 @@ const MoviesList = props => {
         })
     }
 
+    // call backend API
+    const find = (query, by) => {
+        MovieDataService.find(query, by)
+            .then(response => {
+                console.log(response.data);
+                setMovies(response.data.movies);
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    }
+
+    // find movie by title
+    const findByTitle = () => {
+        find(searchTitle, "title")
+    }
+
+    // find movie by rating
+    const findByRating = () => {
+        if(searchRating === "All Ratings") {
+            retrieveMovies();
+        } else {
+            find(searchRating, "rating");
+        }
+    }
+
     const onChangeSearchTitle = e => {
         const searchTitle = e.target.value;
         setSearchTitle(searchTitle);
@@ -63,44 +89,47 @@ const MoviesList = props => {
         <div className='App'>
             <Container>
                 <Form>
-                    <Col>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control 
+                                    type="text"
+                                    placeholder="Search by title"
+                                    value={searchTitle} // set to searchTitle state variable
+                                    onChange={onChangeSearchTitle}/>
+                            </Form.Group>
+                            {/* call findByTitle */}
+                            <Button
+                                variant="primary"
+                                type="button"
+                                onClick={findByTitle}>
+                                Search
+                            </Button>      
+                        </Col>
+                        <Col>
                         <Form.Group>
-                            <Form.Control 
-                                type="text"
-                                placeholder="Search by title"
-                                value={searchTitle} // set to searchTitle state variable
-                                onChange={onChangeSearchTitle}/>
+                            {/* dropdown to select movie rating */}
+                            <Form.Control
+                                as="select" onChange={onChangeSearchRating}>
+                                {ratings.map(rating => {
+                                    return(
+                                        <option value={rating}>{rating}</option>
+                                    );
+                                })}
+                            </Form.Control>
                         </Form.Group>
-                        {/* call findByTitle */}
+                        {/* call findByRating */}
                         <Button
                             variant="primary"
                             type="button"
-                            onClick={findByTitle}>
+                            onClick={findByRating}
+                        >
                             Search
-                        </Button>      
-                    </Col>
-                    <Col>
-                    <Form.Group>
-                        {/* dropdown to select movie rating */}
-                        <Form.Control
-                            as="select" onChange={onChangeSearchRating}>
-                            {ratings.map(rating => {
-                                return(
-                                    <option value={rating}></option>
-                                );
-                            })}
-                        </Form.Control>
-                    </Form.Group>
-                    {/* call findByRating */}
-                    <Button
-                        variant="primary"
-                        type="button"
-                        onClick={findByRatings}
-                    >
-                        Search
-                    </Button>
-                    </Col>
+                        </Button>
+                        </Col>
+                    </Row>
                 </Form>
+
                 <Row>
                     {/* map, for each movie in 'movies' return Card component */}
                     {movies.map((movie) => {
@@ -125,9 +154,6 @@ const MoviesList = props => {
         </div>
     );
 }
-
-// function MoviesList() {
-// }
 
 export default MoviesList;
 
