@@ -10,6 +10,12 @@ const AddReview = props => {
     let editing = false;
     let initialReviewState = "";
 
+    // check if state is passed into AddReview
+    if(props.location.state && props.location.state.currentReview) {
+        editing = true;
+        initialReviewState = props.location.state.currentReview.review;
+    }
+
     // true = editing mode, false = adding review
     const [review, setReview] = useState(initialReviewState);
     const [submitted, setSubmitted] = useState(false); // keeps track if review is submmited
@@ -29,13 +35,27 @@ const AddReview = props => {
             movie_id: props.match.params.id // get movie id direct url
         }
 
-        MovieDataService.createReview(data)
+        if(editing) {
+            // get existing review id
+            data.review_id = props.location.state.currentReview._id;
+            MovieDataService.updateReview(data)
+            .then(response => {
+                setSubmitted(true);
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            })
+        }
+        else {
+            MovieDataService.createReview(data)
             .then(response => {
                 setSubmitted(true);
             })
             .catch(e => {
                 console.log(e);
             });
+        }
     }
 
     return(
@@ -65,7 +85,6 @@ const AddReview = props => {
             )}
         </div>
     );
-
 }
 
 export default AddReview;
