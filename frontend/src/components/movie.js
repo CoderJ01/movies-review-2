@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import moment from 'moment';
 // import Media from 'react-bootstrap/Media';
 
 const Movie = props => {
@@ -64,7 +65,7 @@ const Movie = props => {
                             return (
                                 <Card key={index}>
                                     <Card.Body>
-                                        <h5>{review.name + " reviewed on " + review.date}</h5>
+                                        <h5>{review.name + " reviewed on "} {moment(review.date).format("Do MMMM YYYY")}</h5>
                                         <p>{review.review}</p>
                                         {props.user && props.user.id === review.user_id &&
                                         <Row>
