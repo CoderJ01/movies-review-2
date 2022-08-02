@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import MovieDataService from '../service/movies';
+import MovieDataService from '../services/movies';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import Media from 'react-bootstrap/Media';
+// import Media from 'react-bootstrap/Media';
 
 const Movie = props => {
 
@@ -58,6 +58,30 @@ const Movie = props => {
                                 </Link>}
                             </Card.Body>
                         </Card>
+                        <br></br>
+                        {/* access reviews array */}
+                        {movie.reviews.map((review, index) => {
+                            return (
+                                <Card key={index}>
+                                    <Card.Body>
+                                        <h5>{review.name + " reviewed on " + review.date}</h5>
+                                        <p>{review.review}</p>
+                                        {props.user && props.user.id === review.user_id &&
+                                        <Row>
+                                            <Col><Link to={{
+                                                pathname: "/movies/" + 
+                                                    props.match.params.id +
+                                                    "review",
+                                                state: {currentReview: review}
+                                            }}>Edit</Link>
+                                            </Col>
+                                            <Col><Button variant="link">Delete</Button></Col>
+                                        </Row>
+                                        }
+                                    </Card.Body>
+                                </Card>
+                            )
+                        })}
                     </Col>
                 </Row>
             </Container>

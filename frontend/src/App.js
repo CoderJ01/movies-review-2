@@ -59,7 +59,7 @@ function App() {
         <AddReview {...props} user={user} />}>
       </Route>
       {/* render Movie */}
-      <Route path="/movies/:id/" render={(props) => 
+      <Route path="/movie/:id/" render={(props) => 
         <Movie {...props} user={user} />}>
       </Route>
       {/* render Login  */}
