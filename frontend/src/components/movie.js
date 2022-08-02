@@ -37,6 +37,24 @@ const Movie = props => {
         getMovie(props.match.params.id)
     }, [props.match.params.id] /* avoid calling multiple times for same movie*/)
 
+    const deleteReview = (reviewId, index) => {
+        MovieDataService.deleteReview(reviewId, props.user.id)
+            // get reviews array
+            .then(response => {
+                setMovie((prevState) => {
+                    // provide index of review to be deleted
+                    prevState.reviews.splice(index, 1);
+                    return({
+                        // set updated reviews array as the state
+                        ...prevState
+                    })
+                })
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    }
+
     return (
         <div>
             <Container>
@@ -76,7 +94,11 @@ const Movie = props => {
                                                 state: {currentReview: review}
                                             }}>Edit</Link>
                                             </Col>
-                                            <Col><Button variant="link">Delete</Button></Col>
+                                            <Col>
+                                                <Button variant="link" onClick={() => deleteReview(review._id, index)}>
+                                                    Delete
+                                                </Button>
+                                            </Col>
                                         </Row>
                                         }
                                     </Card.Body>
