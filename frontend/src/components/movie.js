@@ -14,7 +14,7 @@ const Movie = props => {
 
     // hold specific movie being shown
     const [movie, setMovie] = useState({
-        id: '',
+        id: null,
         title: "",
         rated: "",
         reviews:[]
