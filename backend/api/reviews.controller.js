@@ -53,7 +53,7 @@ export default class ReviewsController {
 
             // ReviewResponse is a document, which contains the number of modified documents
             if(ReviewResponse.modifiedCount === 0) {
-                throw new Error ("unable to update review. User may npt be original poster");
+                throw new Error ("unable to update review. User may not be original poster");
             }
             res.json({ status: "success" });
         }
