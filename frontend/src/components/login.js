@@ -8,6 +8,12 @@ const Login = props => {
     const [name, setName] = useState("");
     const [id, setId] = useState("");
 
+    // call login
+    const login = () => {
+        props.login({name: name, id: id});
+        props.history.push('/');
+    }
+
     const onChangeName = e => {
         const name = e.target.value;
         setName(name);
@@ -16,12 +22,6 @@ const Login = props => {
     const onChangeId = e => {
         const id = e.target.value;
         setId(id);
-    }
-
-    // call login
-    const login = () => {
-        props.login({name: name, id: id});
-        props.history.push('/');
     }
 
     return(

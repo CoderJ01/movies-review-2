@@ -28,7 +28,7 @@ const MoviesList = props => {
 
     // performed after rendering
     useEffect(() => {
-        // retrieveMovies()
+        retrieveMovies()
         retrieveRatings()
     },[])
 
