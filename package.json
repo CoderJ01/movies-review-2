@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/index.js",
-    "src":"cd frontend && npm start",
-    "server":"cd backend && node index.js",
-    "start_full_app":"concurrently \"npm run server\" \"npm run src\""
+    "src": "cd frontend && npm start",
+    "server": "cd backend && node index.js",
+    "start_full_app": "concurrently \"npm run server\" \"npm run src\""
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/CoderJ01/movies-review-2#readme",
   "dependencies": {
-    "concurrently": "^7.3.0"
+    "concurrently": "^7.3.0",
+    "mongodb": "^4.8.1"
   }
 }
