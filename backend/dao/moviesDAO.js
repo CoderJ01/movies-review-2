@@ -1,7 +1,7 @@
 import mongodb from "mongodb";
 const ObjectId = mongodb.ObjectId;
 
-let movies; // stores reference to the database
+let movies; // stores reference to database
 
 export default class MoviesDAO {
     // inject db called as soon as server starts and provides database reference to movies
