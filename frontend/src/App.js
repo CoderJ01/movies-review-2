@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>Movie Reviews</Navbar.Brand>
+        <Navbar.Brand><button onClick={callApi}>Movie Reviews</button></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -69,6 +69,14 @@ function App() {
     </Switch>
     </div>
   );
+}
+
+function callApi() {
+  fetch('https://mern-movie-reviews.herokuapp.com/', { 
+    method: 'GET'
+  })
+    .then(data => data.json())
+    .then(json => alert(JSON.stringify(json)))
 }
 
 export default App;
